@@ -1,19 +1,24 @@
 <template>
-  <h3>Reusable Slot Cards</h3>
-  <p>We create card-like div boxes from the foods array.</p>
-  <p>We also create a card-like footer by reusing the same component.</p>
-  <div id="wrapper">
-    <slot-comp v-for="x in foods">
-      <img v-bind:src="x.url">
-      <h4>{{x.name}}</h4>
-    </slot-comp>
-  </div>
-  <footer>
-    <slot-comp>
-      <h4>Footer</h4>
-    </slot-comp>
-  </footer>
+  <h3>Slots Fallback Content</h3>
+  <p>A component without content provided can have fallback content in the slot tag.</p>
+  <slot-comp>
+    <!-- Empty -->
+  </slot-comp>
+  <slot-comp>
+    <h4>This content is provided from App.vue</h4>
+  </slot-comp>
 </template>
+
+<script></script>
+
+<style>
+  #app div {
+    width: 150px;
+  }
+  h4 {
+    text-align: center;
+  }
+</style>        
 <script>
   export default {
     data() {
