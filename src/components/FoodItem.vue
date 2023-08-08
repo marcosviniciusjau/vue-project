@@ -10,21 +10,16 @@
 </template>
 
 <script>
-  export default {
-    props: ['foodName','foodDesc','isFavorite'],
-    data() {
-      return {
-        foodIsFavorite: this.isFavorite
-      }
-    },
-    methods: {
-      toggleFavorite() {
-        this.$emit('toggle-favorite', this.foodName);
-      }
+export default {  
+  props: ['foodName','foodDesc','isFavorite'],
+  emits: ['toggle-favorite'],
+  methods: {
+    toggleFavorite() {
+      this.$emit('toggle-favorite', this.foodName);
     }
   }
+};
 </script>
-
 <style>
   img {
     height: 1.5em;
