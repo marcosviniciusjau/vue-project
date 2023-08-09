@@ -1,57 +1,46 @@
 <template>
-  <h3>Slots Fallback Content</h3>
-  <p>A component without content provided can have fallback content in the slot tag.</p>
-  <slot-comp>
-    <!-- Empty -->
-  </slot-comp>
-  <slot-comp>
-    <h4>This content is provided from App.vue</h4>
-  </slot-comp>
+  <h1>Example</h1>
+  <p>Click the button to fetch data with an HTTP request.</p>
+  <p>Each click generates an object with a random user from <a href="https://random-data-api.com/" target="_blank">https://random-data-api.com/</a>.</p>
+  <p>The robot avatars are lovingly delivered by <a href="http://Robohash.org" target="_blank">RoboHash</a>.</p>
+  <button @click="fetchData">Fetch data</button>
+  <div v-if="data" id="dataDiv">
+    <img :src="data.data.avatar" alt="avatar">
+    <pre>{{ data.data.first_name + " " + data.data.last_name }}</pre>
+    <p>"{{ data.data.employment.title }}"</p>
+  </div>
 </template>
 
-<script></script>
-
-<style>
-  #app div {
-    width: 150px;
-  }
-  h4 {
-    text-align: center;
-  }
-</style>        
 <script>
+  import axios from 'axios'
+
   export default {
     data() {
       return {
-        foods: [
-        { name: 'Apple', desc: 'Apples are a type of fruit that grow on trees.', url: 'img_apple.svg'},
-        { name: 'Pizza', desc: 'Pizza has a bread base with tomato sauce, cheese, and toppings on top.', url: 'img_pizza.svg'},
-        { name: 'Rice', desc: 'Rice is a type of grain that people like to eat.', url: 'img_rice.svg'},
-        { name: 'Fish', desc: 'Fish is an animal that lives in water.', url: 'img_fish.svg'},
-        { name: 'Cake', desc: 'Cake is something sweet that tates good but is not consodered healthy.', url: 'img_cake.svg'}
-      ]
+        data: null,
+      };
+    },
+    methods: {
+      async fetchData() {      
+        this.data = await axios.get("https://random-data-api.com/api/v2/users");
       }
     }
-  }
+  };
 </script>
+
 <style>
-  #wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-  #wrapper > div {
-    background-color: lightgreen;
-  }
-  footer > div {
-    background-color: lightpink;
-  }
-  #wrapper img {
-    display: block; 
-    margin: 20% auto 0; 
-    width: 60%;
-  }
-  h3, h4 {
-    text-align: center;
-  }
-</style>      
+#dataDiv {
+  width: 240px;
+  background-color: aquamarine;
+  border: solid black 1px;
+  margin-top: 10px;
+  padding: 10px;
+}
+#dataDiv > img {
+  width: 100%;
+}
+pre {
+  font-size: larger;
+  font-weight: bold;
+}
+</style>
