@@ -1,8 +1,16 @@
 import { createApp } from 'vue'
-
+import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
-import  SlotComp from './components/SlotComp.vue'
+import FoodItem from './components/FoodItem.vue'
+import AnimalCollection from './components/AnimalCollection.vue'
 
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        { path: '/animals', component: AnimalCollection },
+        { path: '/food', component: FoodItem },
+    ]
+});
 const app = createApp(App)
-app.component('slot-comp', SlotComp)
+app.use(router);
 app.mount('#app')
